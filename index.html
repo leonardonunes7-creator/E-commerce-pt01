@@ -1,94 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ecommerce - Azul Oceano</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce - Azul Oceano</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
-    
-    <header class="header">
-        <a href="#" class="icon-link" aria-label="Página Inicial">
-            <span class="material-symbols-outlined icon">home</span>
-        </a>
-        <a href="#" class="icon-link" id="cart-icon" aria-label="Carrinho de Compras">
-            <span class="material-symbols-outlined icon">shopping_cart</span>
-            <span id="cart-badge" class="cart-badge hidden">0</span>
-        </a>
-    </header>
+  
+  <header class="header">
+    <a href="#" class="icon-link" aria-label="Página Inicial">
+      <span class="material-symbols-outlined icon">home</span>
+    </a>
+    <a href="#" class="icon-link" id="cart-icon" aria-label="Carrinho de Compras">
+      <span class="material-symbols-outlined icon">shopping_cart</span>
+      <span id="cart-badge" class="cart-badge hidden">0</span>
+    </a>
+  </header>
 
-    <main id="produtos-container"></main>
+  <main id="produtos-container"></main>
 
-    <footer class="footer">
-        Todos os direitos reservados
-    </footer>
+  <footer class="footer">
+    Todos os direitos reservados
+  </footer>
 
-    <div id="modal-overlay" class="modal-overlay hidden"></div>
+  <div id="modal-overlay" class="modal-overlay hidden"></div>
 
-    <div id="cart-modal" class="modal hidden">
-        <div class="modal-header">
-            <h2>Meu Carrinho</h2>
-            <button class="modal-close" id="close-cart-modal">&times;</button>
-        </div>
-        <div class="modal-body" id="cart-items">
-            </div>
-        <div class="modal-footer">
-            <div class="cart-total">
-                <strong>Total:</strong>
-                <span id="cart-total">R$ 0,00</span>
-            </div>
-            <button class="btn-checkout" id="checkout-button">Ir para Pagamento</button>
-        </div>
+  <!-- === MODAL DO CARRINHO === -->
+  <div id="cart-modal" class="modal hidden">
+    <div class="modal-header">
+      <h2>Meu Carrinho</h2>
+      <button class="modal-close" id="close-cart-modal">&times;</button>
+    </div>
+    <div class="modal-body" id="cart-items"></div>
+    <div class="modal-footer">
+      <div class="cart-total">
+        <strong>Total:</strong>
+        <span id="cart-total">R$ 0,00</span>
+      </div>
+      <button class="btn-checkout" id="checkout-button">Ir para Pagamento</button>
+    </div>
+  </div>
+
+  <!-- === MODAL DE PAGAMENTO === -->
+  <div id="payment-modal" class="modal hidden">
+    <div class="modal-header">
+      <h2>Finalizar Pagamento</h2>
+      <button class="modal-close" id="close-payment-modal">&times;</button>
     </div>
 
-    <div id="payment-modal" class="modal hidden">
-        <div class="modal-header">
-            <h2>Finalizar Pagamento</h2>
-            <button class="modal-close" id="close-payment-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <h4>Escolha a forma de pagamento:</h4>
-            <div class="payment-options">
-                <label>
-                    <input type="radio" name="payment-method" value="pix" checked> Pix
-                </label>
-                <label>
-                    <input type="radio" name="payment-method" value="credit-card"> Cartão de Crédito
-                </label>
-                <label>
-                    <input type="radio" name="payment-method" value="boleto"> Boleto
-                </label>
-            </div>
+    <div class="modal-body">
+      <h4>Escolha a forma de pagamento:</h4>
 
-            <div id="credit-card-form" class="hidden">
-                <hr>
-                <div class="form-group">
-                    <label for="card-number">Número do Cartão</label>
-                    <input type="text" id="card-number" placeholder="0000 0000 0000 0000">
-                </div>
-                <div class="form-group">
-                    <label for="card-name">Nome no Cartão</label>
-                    <input type="text" id="card-name" placeholder="Seu nome">
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="card-expiry">Validade (MM/AA)</label>
-                        <input type="text" id="card-expiry" placeholder="MM/AA">
-                    </div>
-                    <div class="form-group">
-                        <label for="card-cvc">CVC</label>
-                        <input type="text" id="card-cvc" placeholder="123">
-                    </div>
-                </div>
-            </div>
+      <div class="payment-options">
+        <label>
+          <input type="radio" name="payment-method" value="pix" checked> Pix
+        </label>
+        <label>
+          <input type="radio" name="payment-method" value="credit-card"> Cartão de Crédito
+        </label>
+        <label>
+          <input type="radio" name="payment-method" value="boleto"> Boleto
+        </label>
+      </div>
+
+      <!-- === FORMULÁRIO CARTÃO === -->
+      <div id="credit-card-form" class="hidden">
+        <hr>
+        <div class="form-group">
+          <label for="card-number">Número do Cartão</label>
+          <input type="text" id="card-number" placeholder="0000 0000 0000 0000">
         </div>
-        <div class="modal-footer">
-            <button class="btn-checkout" id="finish-payment-button">Finalizar Pagamento</button>
+        <div class="form-group">
+          <label for="card-name">Nome no Cartão</label>
+          <input type="text" id="card-name" placeholder="Seu nome">
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="card-expiry">Validade (MM/AA)</label>
+            <input type="text" id="card-expiry" placeholder="MM/AA">
+          </div>
+          <div class="form-group">
+            <label for="card-cvc">CVC</label>
+            <input type="text" id="card-cvc" placeholder="123">
+          </div>
+        </div>
+      </div>
+
+      <!-- === CONTAINER PARA QR CODE PIX === -->
+      <div id="pix-container" class="hidden mt-6 text-center"></div>
+
     </div>
-    
-    <script src="script.js"></script>
+
+    <div class="modal-footer">
+      <button class="btn-checkout" id="finish-payment-button">Finalizar Pagamento</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
